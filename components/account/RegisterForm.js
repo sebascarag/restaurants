@@ -33,6 +33,7 @@ export default function RegisterForm() {
         setLoading(false)
         if (!result.statusResponse) {
             setErrorEmail(result.error)
+            return
         }
         navigation.navigate("account")
     }
