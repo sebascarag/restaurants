@@ -3,11 +3,80 @@ import { StyleSheet, Text, View } from 'react-native'
 import { map } from 'lodash'
 import { Icon, ListItem } from 'react-native-elements'
 import Modal from '../../components/Modal'
+import ChangeDisplayNameForm from '../../components/account/ChangeDisplayNameForm'
+import UserLogged from './UserLogged'
 
-export default function AccountOptions({ use, toastRef }) {
-    const menuOptions = generateOptions()
+export default function AccountOptions({ user, toastRef, setRealoadUser }) {
     const [showModal, setShowModal] = useState(false)
+    const [renderComponent, setRenderComponent] = useState(null)
     
+    const generateOptions = () => {
+        return[
+            {
+                title: "Cambiar Nombres y Apellidos",
+                iconNameLeft: "account-circle",
+                iconColorLeft: "#2596be",
+                iconNameRight: "chevron-right",
+                iconColorRight: "#2596be",
+                onPress: () => selectedComponent("displayName")
+            },
+            {
+                title: "Cambiar Email",
+                iconNameLeft: "at",
+                iconColorLeft: "#2596be",
+                iconNameRight: "chevron-right",
+                iconColorRight: "#2596be",
+                onPress: () => selectedComponent("email")
+            },
+            {
+                title: "Cambiar Contraseña",
+                iconNameLeft: "lock-reset",
+                iconColorLeft: "#2596be",
+                iconNameRight: "chevron-right",
+                iconColorRight: "#2596be",
+                onPress: () => selectedComponent("password")
+            }
+        ]
+    }
+
+    const selectedComponent = (key) => {
+        switch (key) {
+            case "displayName":
+                setRenderComponent(
+                    <ChangeDisplayNameForm 
+                        displayName={user.displayName}
+                        setShowModal={setShowModal}
+                        toastRef={toastRef} 
+                        setRealoadUser={setRealoadUser}  
+                    />
+                )
+                break;
+            case "email":
+                setRenderComponent(
+                    <ChangeDisplayNameForm 
+                        displayName={user.displayName}
+                        setShowModal={setShowModal}
+                        toastRef={toastRef} 
+                        setRealoadUser={setRealoadUser}  
+                    />
+                )
+                break;
+            case "password":
+                setRenderComponent(
+                    <ChangeDisplayNameForm 
+                        displayName={user.displayName}
+                        setShowModal={setShowModal}
+                        toastRef={toastRef}   
+                        setRealoadUser={setRealoadUser}
+                    />
+                )
+                break;
+        }
+        setShowModal(true)
+    }
+
+    const menuOptions = generateOptions()
+
     return (
         <View>
             {
@@ -35,50 +104,13 @@ export default function AccountOptions({ use, toastRef }) {
                     </ListItem>
                 ))
             }
-            <Modal
-                isVisible={showModal} setVisible={setShowModal}
-            >
-                <Text>Hola mundo modal!!</Text>
-                <Text>Hola mundo modal!!</Text>
-                <Text>Hola mundo modal!!</Text>
-                <Text>Hola mundo modal!!</Text>
-                <Text>Hola mundo modal!!</Text>
+            <Modal isVisible={showModal} setVisible={setShowModal}>
+                {
+                    renderComponent
+                }
             </Modal>
         </View>
     )
-}
-
-const generateOptions = () => {
-    return[
-        {
-            title: "Cambiar Nombres y Apellidos",
-            iconNameLeft: "account-circle",
-            iconColorLeft: "#2596be",
-            iconNameRight: "chevron-right",
-            iconColorRight: "#2596be",
-            onPress: () => selectedComponent("displayName")
-        },
-        {
-            title: "Cambiar Email",
-            iconNameLeft: "at",
-            iconColorLeft: "#2596be",
-            iconNameRight: "chevron-right",
-            iconColorRight: "#2596be",
-            onPress: () => selectedComponent("email")
-        },
-        {
-            title: "Cambiar Contraseña",
-            iconNameLeft: "lock-reset",
-            iconColorLeft: "#2596be",
-            iconNameRight: "chevron-right",
-            iconColorRight: "#2596be",
-            onPress: () => selectedComponent("password")
-        }
-    ]
-}
-
-const selectedComponent = (key) => {
-    console.log(key)
 }
 
 const styles = StyleSheet.create({
