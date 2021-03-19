@@ -23,7 +23,7 @@ export default function ChangeDisplayNameForm({ displayName, setShowModal, toast
             return
         }
         setRealoadUser(true)
-        toastRef.current.show("Se han actualizado nombres y apellidos", 3000)
+        toastRef.current.show("¡Se han actualizado nombres y apellidos!", 3000)
         setShowModal(false)
     }
     const validateForm = () =>{
