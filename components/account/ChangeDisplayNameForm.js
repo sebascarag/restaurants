@@ -6,7 +6,7 @@ import { Button, Input } from 'react-native-elements'
 import { updateProfile } from '../../utils/actions'
 
 export default function ChangeDisplayNameForm({ displayName, setShowModal, toastRef, setRealoadUser }) {
-    const [newDisplayName, setnewDisplayName] = useState(null)
+    const [newDisplayName, setnewDisplayName] = useState(displayName)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
 

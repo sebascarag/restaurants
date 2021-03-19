@@ -5,6 +5,7 @@ import { Icon, ListItem } from 'react-native-elements'
 import Modal from '../../components/Modal'
 import ChangeDisplayNameForm from '../../components/account/ChangeDisplayNameForm'
 import UserLogged from './UserLogged'
+import ChangeEmailForm from '../../components/account/ChangeEmailForm'
 
 export default function AccountOptions({ user, toastRef, setRealoadUser }) {
     const [showModal, setShowModal] = useState(false)
@@ -53,8 +54,8 @@ export default function AccountOptions({ user, toastRef, setRealoadUser }) {
                 break;
             case "email":
                 setRenderComponent(
-                    <ChangeDisplayNameForm 
-                        displayName={user.displayName}
+                    <ChangeEmailForm 
+                        email={user.email}
                         setShowModal={setShowModal}
                         toastRef={toastRef} 
                         setRealoadUser={setRealoadUser}  
