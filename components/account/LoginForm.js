@@ -32,6 +32,7 @@ export default function LoginForm() {
         if (!result.statusResponse) {
             setErrorEmail(result.error)
             setErrorPasword(result.error)
+            return
         }
         navigation.navigate("account")
     }

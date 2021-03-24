@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Icon, Input } from 'react-native-elements'
 
-import { reautenticate, updateEmail } from '../../utils/actions'
-import { validateEmail } from '../../utils/helpers'
+import { reautenticate, updatePassword } from '../../utils/actions'
 
 export default function ChangePasswordForm({ setShowModal, toastRef }) {
     const [newPasword, setNewPasword] = useState(null)
@@ -22,23 +21,22 @@ export default function ChangePasswordForm({ setShowModal, toastRef }) {
         if (!validateForm()) {
             return
         }
-        // setLoading(true)
-        // const resultReautenticate = await reautenticate(password)
-        // if (!resultReautenticate.statusResponse) {
-        //     setLoading(false)
-        //     setErrorPasword("Contraseña incorrecta.")
-        //     return
-        // }
-        // const resultUpdateEmail = await updateEmail(newEmail)
-        // setLoading(false)
+        setLoading(true)
+        const resultReautenticate = await reautenticate(currentPassword)
+        if (!resultReautenticate.statusResponse) {
+            setLoading(false)
+            setErrorCurrentPasword("Contraseña incorrecta.")
+            return
+        }
+        const resultUpdatePassword = await updatePassword(newPasword)
+        setLoading(false)
 
-        // if (!resultUpdateEmail.statusResponse) {
-        //     setErrorEmail("No se puede cambiar por este correo, ya está en uso por otro usuario.")
-        //     return
-        // }
-        // setRealoadUser(true)
-        // toastRef.current.show("¡Se han actualizado el email!", 3000)
-        // setShowModal(false)
+        if (!resultUpdatePassword.statusResponse) {
+            setNewPasword("Hubo un problema cambiando la contraseña, por favor intente más tarde.")
+            return
+        }
+        toastRef.current.show("¡Se han actualizado la contraseña!", 3000)
+        setShowModal(false)
     }
 
     const validateForm = () =>{
