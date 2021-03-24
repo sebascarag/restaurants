@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { map } from 'lodash'
 import { Icon, ListItem } from 'react-native-elements'
-import Modal from '../../components/Modal'
-import ChangeDisplayNameForm from '../../components/account/ChangeDisplayNameForm'
-import UserLogged from './UserLogged'
-import ChangeEmailForm from '../../components/account/ChangeEmailForm'
+import Modal from '../Modal'
+import ChangeDisplayNameForm from './ChangeDisplayNameForm'
+import UserLogged from '../../screens/account/UserLogged'
+import ChangeEmailForm from './ChangeEmailForm'
+import ChangePasswordForm from './ChangePasswordForm'
 
 export default function AccountOptions({ user, toastRef, setRealoadUser }) {
     const [showModal, setShowModal] = useState(false)
@@ -64,11 +65,9 @@ export default function AccountOptions({ user, toastRef, setRealoadUser }) {
                 break;
             case "password":
                 setRenderComponent(
-                    <ChangeDisplayNameForm 
-                        displayName={user.displayName}
+                    <ChangePasswordForm 
                         setShowModal={setShowModal}
                         toastRef={toastRef}   
-                        setRealoadUser={setRealoadUser}
                     />
                 )
                 break;
