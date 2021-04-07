@@ -17,12 +17,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sebascarag.restaurants"
     },
     "android": {
+      "package": "com.sebascarag.restaurants",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config":{
+        "googleMaps": {
+          "apiKey": "AIzaSyAj9yPRtVNLaqqRDUreIAE2vb4otulwe0o"
+        }
       },
       "permissions": [
         "CAMERA_ROLL",

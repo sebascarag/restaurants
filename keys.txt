@@ -1,0 +1,5 @@
+Api Key:                            AIzaSyAj9yPRtVNLaqqRDUreIAE2vb4otulwe0o
+Google Certificate Fingerprint:     CD:93:9D:C8:F2:EE:81:4D:E9:02:B4:7A:61:DC:08:CD:E5:40:F1:25
+Google Certificate Hash (SHA-1):    CD939DC8F2EE814DE902B47A61DC08CDE540F125
+Google Certificate Hash (SHA-256):  863D49DBB900DC179F9E1582E335A62BEF9864FCEBE5609C4CD76490AC5C46CF
+Facebook Key Hash:                  zZOdyPLugU3pArR6YdwIzeVA8SU=
