@@ -32,12 +32,13 @@
         }
       },
       "permissions": [
-        "MEDIA_LIBRARY",
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
+        "LOCATION",
         "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION",
+        "USER_FACING_NOTIFICATIONS"
       ]
     },
     "web": {
