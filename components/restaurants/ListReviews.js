@@ -18,6 +18,7 @@ export default function ListReviews({ navigation, idRestaurant }) {
                         title="Escribre una opinión"
                         buttonStyle={styles.btnAddReview}
                         titleStyle={styles.btnTitleAddReview}
+                        onPress={() => navigation.navigate("add-review-restaurant", {idRestaurant: idRestaurant})}
                         icon={{
                             type:"material-community",
                             name: "square-edit-outline",
