@@ -185,3 +185,23 @@ export const updateDocument = async(collection, id, data) => {
     }
     return result
 }
+
+export const getRestaurantReviews = async(id) => {
+    const result = { statusResponse: true, error: null, reviews: [] }
+    try {
+        const response = await db.
+            collection("reviews").
+            // orderBy("createAt", "desc").
+            where("idRestaurant", "==", id).
+            get()
+        response.forEach((doc) => {
+            const reviews = doc.data()
+            reviews.id = doc.id
+            result.reviews.push(reviews)
+        })
+    } catch (error) {
+        result.statusResponse = false
+        result.error = error
+    }
+    return result
+}
