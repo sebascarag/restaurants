@@ -6,7 +6,7 @@ import { map } from 'lodash'
 import firebase from 'firebase/app'
 import Toast from 'react-native-easy-toast'
 
-import { addDocumentWithoutId, getCurrentUser, getDocumentById, getIsFavorite } from '../../utils/actions'
+import { addDocumentWithoutId, getCurrentUser, getDocumentById, getIsFavorite, deleteFavorite } from '../../utils/actions'
 import { formatPhone } from '../../utils/helpers'
 import { Rating } from 'react-native-ratings'
 import Loading from '../../components/Loading'
@@ -78,12 +78,20 @@ export default function Restaurant({ navigation, route }) {
             setIsFavorite(true)
             toastRef.current.show("¡Restaurante añadido a favoritos!", 3000)
         }else{
-            toastRef.current.show("¡No se pudo agregar el Restaurante a favoritos, por favor intenta más tarde!", 3000)
+            toastRef.current.show("¡No se pudo agregar el restaurante a favoritos, por favor intenta más tarde!", 3000)
         }
     }
 
-    const removeFavorite = () => {
-        console.log("add favorite")
+    const removeFavorite = async() => {
+        setLoading(true)
+        const response = await deleteFavorite(restaurant.id)
+        setLoading(false)
+        if (response.statusResponse) {
+            setIsFavorite(false)
+            toastRef.current.show("¡Restaurante eliminado de favoritos!", 3000)
+        }else{
+            toastRef.current.show("¡No se pudo eliminar el restaurante de favoritos, por favor intenta más tarde!", 3000)
+        }
     }
 
     if (!restaurant) {
