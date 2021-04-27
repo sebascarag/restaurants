@@ -54,6 +54,7 @@ export default function AddRestaurantForm( { toastRef, setLoading, navigation } 
         navigation.navigate("restaurants")
     }
 
+    //load image on storage
     const UploadImages = async() =>{
         const imagesUrl = []
         await Promise.all(
@@ -233,6 +234,7 @@ function ImageRestaurant({ imageRestaurant }){
 
 function UploadImagen({toastRef, imagesSelected, setImagesSelected}){
     const imageSelect = async() => {
+        // [4,3] size image 
         const response = await loadImageFromGallery([4,3])
         if (!response.status) {
            toastRef.current.show("¡No has seleccionado ninguna imagen!", 3000) 

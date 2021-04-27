@@ -32,7 +32,7 @@
         }
       },
       "permissions": [
-        "CAMERA_ROLL",
+        "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
         "LOCATION",
