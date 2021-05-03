@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
-import { Button, Icon } from 'react-native-elements'
+import { Button, Icon, Image } from 'react-native-elements'
 import { useFocusEffect } from "@react-navigation/native"
 import Toast from 'react-native-easy-toast'
 import firebase from 'firebase/app'
@@ -48,10 +48,65 @@ export default function Favorites({ navigation }) {
 
     return (
         
-        <View>
-            <Text>Favorites</Text>
+        <View style={styles.viewBody}>
+            { 
+                restaurants ? (
+                <FlatList
+                    data={restaurants}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={(restaurant) => (
+                        <Restaurant
+                            restaurant={restaurant}
+                            setLoading={setLoading}
+                            toastRef={toastRef}
+                            navigation={navigation}
+                        />
+                    )}
+                />
+                ) : (
+                    <View style={styles.loaderRestaurant}>
+                        <ActivityIndicator size='large'/>
+                        <Text style={{textAlign: 'center'}}>
+                            Cargando Restaurantes...
+                        </Text>
+                    </View>
+                )
+            }
             <Toast ref={toastRef} position="center" opacity={0.9} />
             <Loading isVisible={loading} text="Por favor espere..." />
+        </View>
+    )
+}
+
+function Restaurant({restaurant, setLoading, toastRef, navigation}){
+    const { id, name, images } = restaurant.item
+    return(
+        <View style={styles.restaurant}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("restaurants", {
+                    screen: "restaurant",
+                    params: { id }
+                })}
+            >
+                <Image
+                    resizeMode="cover"
+                    style={styles.image}
+                    PlaceholderContent={<ActivityIndicator color="#fff" />}
+                    source={{
+                        uri: images[0]
+                    }}
+                />
+                <View style={styles.info}>
+                    <Text style={styles.name}>{name}</Text>
+                    <Icon
+                        type="material-community"
+                        name="heart"
+                        color="#f00"
+                        containerStyle={styles.favorite}
+                        underlayColor="transparent"
+                    />
+                </View>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -92,4 +147,42 @@ function UserNoLogged({ navigation }){
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    viewBody:{
+        flex:1,
+        backgroundColor:"#f2f2f2",
+
+    },
+    loaderRestaurant:{
+        marginVertical:10,
+
+    },
+    restaurant:{
+        margin: 10,
+
+    },
+    image:{
+        width:"100%",
+        height:180
+    },
+    info:{
+        flex: 1,
+        alignItems: "center",
+        justifyContent:"space-between",
+        flexDirection:"row",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        marginTop: -30,
+        backgroundColor: "#fff"
+    },
+    name:{
+        fontWeight:"bold",
+        fontSize:20
+    },
+    favorite:{
+        marginTop:-35,
+        backgroundColor:"#fff",
+        padding: 15,
+        borderRadius:100
+    }
+})
